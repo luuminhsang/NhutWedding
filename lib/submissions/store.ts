@@ -2,7 +2,8 @@ import { createAdminClient } from "../supabase/admin";
 import { sendToGoogleSheets, type SheetSubmission } from "../integrations/google-sheets";
 
 export async function saveSubmission(submission: SheetSubmission) {
-  const storage = process.env.SUBMISSIONS_STORAGE ?? "supabase";
+  const rawStorage = process.env.SUBMISSIONS_STORAGE || process.env.NEXT_PUBLIC_SUBMISSIONS_STORAGE || "supabase";
+  const storage = rawStorage.trim().replace(/^["']|["']$/g, "");
   if (storage === "google_sheets") {
     await sendToGoogleSheets(submission);
     return;

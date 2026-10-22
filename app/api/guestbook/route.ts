@@ -16,7 +16,8 @@ export async function POST(request: NextRequest) {
   try {
     await saveSubmission({ id, kind: "guestbook", created_at: new Date().toISOString(), data: { ...parsed.data, status: "pending", consent_public_display: true } });
     return NextResponse.json({ status: "pending" }, { status: 201 });
-  } catch {
+  } catch (error) {
+    console.error("Lỗi khi lưu Guestbook:", error);
     return NextResponse.json({ error: "Hệ thống đang tạm thời không thể nhận lời chúc. Vui lòng thử lại sau." }, { status: 503 });
   }
 }

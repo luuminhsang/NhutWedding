@@ -17,7 +17,8 @@ export async function POST(request: NextRequest) {
     const confirmationCode = id.replaceAll("-", "").slice(0, 10).toUpperCase();
     await saveSubmission({ id, kind: "rsvp", created_at: new Date().toISOString(), data: { ...parsed.data, contact: parsed.data.contact ?? "", message: parsed.data.message ?? "", confirmation_code: confirmationCode } });
     return NextResponse.json({ confirmation_code: confirmationCode }, { status: 201 });
-  } catch {
+  } catch (error) {
+    console.error("Lỗi khi lưu RSVP:", error);
     return NextResponse.json({ error: "Hệ thống đang tạm thời không thể nhận phản hồi. Vui lòng thử lại sau." }, { status: 503 });
   }
 }
