@@ -1,0 +1,107 @@
+/* Motion stays decorative: no pointer interception or layout shifts. */
+.wedding-page { --ease-romantic: cubic-bezier(.22, 1, .36, 1); }
+.form-error { margin:0; padding:12px 14px; border-left:3px solid var(--wine); background:#fff9f5; color:var(--wine); font-size:.8rem; letter-spacing:0; }
+.primary-button:disabled { opacity:.65; cursor:wait; }
+.petal-field, .hero-sparkles { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.petal-track { position:absolute; top:-30px; width:var(--petal-size); height:var(--petal-size); animation:petal-fall var(--fall-duration) linear var(--fall-delay) infinite; }
+.petal-track i { display:block; width:100%; height:100%; border-radius:80% 0 75% 20%; background:linear-gradient(135deg,#efd0d4,#bc7187); opacity:.45; animation:petal-sway 4s ease-in-out var(--fall-delay) infinite alternate; }
+.petal-track .gold-petal { background:linear-gradient(135deg,#f4e4bf,#c6a978); opacity:.5; }
+.intro > :not(.petal-field) { position:relative; }
+.intro .envelope { z-index:1; animation:envelope-arrive 1.1s var(--ease-romantic) both, envelope-float 5s ease-in-out 1.1s infinite; }
+.intro-stars { animation:star-breathe 3.5s ease-in-out infinite; }
+.intro::before, .intro::after { animation:star-breathe 4s ease-in-out infinite alternate; }
+.intro::after { animation-delay:-2s; }
+.intro .kicker { animation:soft-reveal 1s var(--ease-romantic) both; }
+.intro .open-button { animation:soft-reveal .8s var(--ease-romantic) .4s both; }
+.envelope-flap { transition:transform .75s var(--ease-romantic), z-index 0s .35s; backface-visibility:hidden; }
+.envelope .card { transition:transform .8s var(--ease-romantic) .35s; }
+.seal { transition:transform .35s, opacity .3s; }
+.seal::after { content:""; position:absolute; inset:-7px; border:1px solid var(--rose); border-radius:50%; animation:seal-ripple 2.8s ease-out infinite; pointer-events:none; }
+.is-opening .envelope { animation:none; }
+.is-opening .envelope-flap { transform:rotateX(180deg); z-index:0; }
+.is-opening .card { transform:translateY(-115px) rotate(-3deg); }
+.is-opening .seal { transform:scale(.65) rotate(18deg); opacity:0; pointer-events:none; }
+.is-opening .open-button { opacity:.6; }
+.hero-sparkles span { position:absolute; color:var(--gold); font-size:18px; opacity:.5; animation:star-breathe 4s ease-in-out infinite; }
+.invitation-open .hero-glow { animation:glow-drift 12s ease-in-out infinite alternate; }
+.invitation-open .hero::before { animation:arch-arrive 1.6s var(--ease-romantic) both; }
+.invitation-open .hero-copy { animation:soft-reveal 1s var(--ease-romantic) .75s both; }
+.invitation-open .hero .outline-button { animation:soft-reveal 1s var(--ease-romantic) .95s both; }
+.invitation-open .hero-note { animation:soft-reveal 1s var(--ease-romantic) 1.15s both; }
+.scroll-cue { position:absolute; right:12%; bottom:26px; display:grid; justify-items:center; gap:8px; color:var(--wine); padding:8px; }
+.scroll-cue span { display:block; width:1px; height:30px; background:linear-gradient(transparent,var(--gold)); transform-origin:top; animation:scroll-line 2.4s ease-in-out infinite; }
+.scroll-cue svg, .hero .outline-button svg { animation:chevron-drift 2.4s ease-in-out infinite; }
+
+/* Reveal only when entering the viewport; content remains present and focusable. */
+.section.is-visible > .section-heading { animation:soft-reveal .9s var(--ease-romantic) both; }
+.section.is-visible > .section-heading > span { animation:rule-grow 1s var(--ease-romantic) .2s both; }
+.section.is-visible > :not(.section-heading) { animation:soft-reveal 1s var(--ease-romantic) .12s both; }
+.is-visible :is(.story-grid, .family-grid, .timeline, .gallery, .rsvp-wrap) > * { animation:soft-reveal .95s var(--ease-romantic) both; animation-delay:.18s; }
+.is-visible :is(.story-grid, .family-grid, .timeline, .gallery, .rsvp-wrap) > :nth-child(2) { animation-delay:.3s; }
+.is-visible .gallery > :nth-child(3) { animation-delay:.4s; }
+.is-visible .gallery > :nth-child(4) { animation-delay:.5s; }
+.is-visible .gallery > :nth-child(5) { animation-delay:.6s; }
+.is-visible .gallery > :nth-child(6) { animation-delay:.7s; }
+.is-visible .gold-rule { animation:rule-grow 1s var(--ease-romantic) .4s both; transform-origin:left; }
+.is-visible .timeline article::before { animation:rule-grow 1.2s var(--ease-romantic) .4s both; transform-origin:top; }
+.countdown-value { overflow:hidden; font-variant-numeric:tabular-nums; padding:.08em 0; }
+.countdown .countdown-digit { display:block; font:inherit; letter-spacing:normal; text-transform:none; animation:digit-in .45s var(--ease-romantic) both; }
+.success, .guestbook-success { animation:soft-reveal .7s var(--ease-romantic) both; }
+.success > svg { animation:heart-pop .8s var(--ease-romantic) both; }
+
+.open-button, .primary-button, .outline-button, .directions-button, footer button { position:relative; overflow:hidden; isolation:isolate; transition:background .25s, box-shadow .25s, translate .25s; }
+.open-button::after, .primary-button::after { content:""; position:absolute; inset:-100% auto -100% -60%; width:35%; background:linear-gradient(90deg,transparent,#ffffff30,transparent); transform:rotate(25deg); pointer-events:none; }
+.open-button::after { animation:button-gleam 5s ease-in-out 2s infinite; }
+.primary-button:hover::after, .primary-button:focus-visible::after { animation:button-gleam 1.1s ease-out; }
+.gallery-item { transition:translate .35s, box-shadow .35s; }
+.gallery-item::after { transition:transform .65s var(--ease-romantic), color .65s; }
+.gallery-item span { transition:translate .35s; }
+.family-grid article, .location-card { transition:background-color .3s, box-shadow .3s; }
+.nav a:not(.brand) { position:relative; }
+.nav a:not(.brand)::after { content:""; position:absolute; bottom:-7px; left:0; right:0; height:1px; background:var(--wine); transform:scaleX(0); transform-origin:left; transition:transform .25s; }
+.nav a:hover::after, .nav a:focus-visible::after { transform:scaleX(1); }
+input, textarea, select { transition:border-color .25s, box-shadow .25s; }
+input:focus, textarea:focus, select:focus { border-color:var(--rose); box-shadow:0 0 0 4px #c58e9a14; }
+.effects-toggle { position:fixed; z-index:13; bottom:20px; left:20px; min-height:44px; display:flex; align-items:center; gap:7px; padding:9px 13px; border:1px solid var(--line); border-radius:24px; background:#fff9f5f2; color:var(--wine); font-size:.62rem; box-shadow:0 4px 15px #302b3012; }
+.effects-toggle:disabled { cursor:default; }
+@media (hover:hover) and (pointer:fine) {
+  .open-button:hover, .primary-button:hover, .outline-button:hover, .directions-button:hover, footer button:hover { translate:0 -3px; box-shadow:0 9px 24px #742f4320; }
+  .seal:hover { transform:scale(1.08) rotate(-6deg); }
+  .gallery-item:hover { translate:0 -5px; box-shadow:0 14px 28px #742f4324; }
+  .gallery-item:hover::after { transform:scale(1.16) rotate(-7deg); color:#ffffff88; }
+  .gallery-item:hover span { translate:0 -4px; }
+  .family-grid article:hover, .location-card:hover { background-color:#f4dfe333; box-shadow:0 10px 30px #742f4309; }
+}
+button:active:not(:disabled), .outline-button:active, .directions-button:active { translate:0 1px; }
+@keyframes petal-fall { 0% { transform:translate3d(0,-30px,0) rotate(0); opacity:0; } 10% { opacity:1; } 90% { opacity:.7; } 100% { transform:translate3d(var(--drift),105svh,0) rotate(300deg); opacity:0; } }
+@keyframes petal-sway { from { transform:rotateY(0) rotate(-25deg); } to { transform:rotateY(65deg) rotate(35deg); } }
+@keyframes envelope-arrive { from { opacity:0; transform:translateY(35px) rotate(-5deg); } to { opacity:1; transform:translateY(0) rotate(0); } }
+@keyframes envelope-float { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-9px) rotate(1deg); } }
+@keyframes star-breathe { 0%,100% { opacity:.3; transform:scale(.85) rotate(-8deg); } 50% { opacity:.8; transform:scale(1.12) rotate(8deg); } }
+@keyframes seal-ripple { 0% { transform:scale(.9); opacity:.6; } 80%,100% { transform:scale(1.35); opacity:0; } }
+@keyframes soft-reveal { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+@keyframes arch-arrive { from { opacity:0; transform:scale(.96); } to { opacity:.75; transform:scale(1); } }
+@keyframes glow-drift { from { transform:translate3d(-5%,-3%,0) scale(.9); } to { transform:translate3d(6%,5%,0) scale(1.1); } }
+@keyframes scroll-line { 0%,100% { transform:scaleY(.6); opacity:.4; } 50% { transform:scaleY(1); opacity:1; } }
+@keyframes chevron-drift { 0%,100% { transform:translateY(-2px); } 50% { transform:translateY(3px); } }
+@keyframes rule-grow { from { transform:scale(0); opacity:0; } to { transform:scale(1); opacity:1; } }
+@keyframes digit-in { from { opacity:0; transform:translateY(35%); } to { opacity:1; transform:translateY(0); } }
+@keyframes heart-pop { 0% { transform:scale(.5); } 55% { transform:scale(1.15); } 100% { transform:scale(1); } }
+@keyframes button-gleam { 0%,65% { left:-60%; } 100% { left:150%; } }
+@media (max-width:680px) {
+  .petal-track:nth-child(n+10) { display:none; }
+  .hero-sparkles span:nth-child(n+5) { display:none; }
+  .scroll-cue { right:5%; bottom:23px; }
+  .scroll-cue span { height:20px; }
+  .effects-toggle { left:max(12px,env(safe-area-inset-left)); bottom:max(12px,env(safe-area-inset-bottom)); padding:9px 11px; }
+  .effects-toggle span { font-size:.58rem; }
+  .is-opening .card { transform:translateY(-85px) rotate(-3deg); }
+}
+@media (max-height:600px) { .is-opening .card { transform:translateY(-55px); } }
+.wedding-page[data-effects="off"] *, .wedding-page[data-effects="off"] *::before, .wedding-page[data-effects="off"] *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+.wedding-page[data-effects="off"] :is(.petal-field,.hero-sparkles) { display:none; }
+html:has(.wedding-page[data-effects="off"]) { scroll-behavior:auto; }
+@media (prefers-reduced-motion:reduce) {
+  .wedding-page *, .wedding-page *::before, .wedding-page *::after { animation:none!important; transition:none!important; }
+  .petal-field, .hero-sparkles { display:none; }
+}

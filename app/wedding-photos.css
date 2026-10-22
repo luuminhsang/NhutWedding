@@ -1,0 +1,27 @@
+.story-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 8px 22px #742f4317;
+}
+
+.lightbox .lightbox-photo {
+  width: min(90vw, 1200px);
+  height: calc(100svh - 140px);
+  aspect-ratio: auto;
+  background: transparent;
+}
+
+@media (max-width: 680px) {
+  .motion-gallery { grid-auto-rows: auto; }
+  .motion-gallery .gallery-item { aspect-ratio: 2 / 3; }
+  .motion-gallery .item-3, .motion-gallery .item-4 {
+    grid-column: 1 / -1;
+    aspect-ratio: 3 / 2;
+  }
+  .motion-gallery .gallery-item > span { font-size: 1rem; }
+  .lightbox { padding: 16px; }
+  .lightbox .lightbox-photo { width: 94vw; }
+}

@@ -1,0 +1,112 @@
+/* Each frame has a different phase, so the album moves like a gentle wave. */
+.motion-gallery { gap:18px; padding:12px 4px; }
+.is-visible .motion-gallery > .gallery-item {
+  isolation:isolate;
+  border-radius:4px;
+  box-shadow:0 8px 22px #742f4317;
+  animation:soft-reveal .9s var(--ease-romantic) both, gallery-float 7s ease-in-out infinite;
+  animation-delay:calc(var(--frame-index) * .12s), calc(var(--frame-index) * -1.15s);
+  transition:scale .5s var(--ease-romantic), box-shadow .5s;
+}
+.motion-gallery .gallery-item::before { z-index:1; pointer-events:none; background:linear-gradient(0deg,#411c30a6,transparent 65%); }
+.motion-gallery .gallery-item::after {
+  content:""; z-index:4; inset:0; border:2px solid #f7dfaf; border-radius:inherit;
+  opacity:0; pointer-events:none; transform:none;
+  box-shadow:inset 0 0 28px #fff2d633;
+  animation:gallery-spotlight 24s ease-in-out infinite;
+  animation-delay:calc(var(--frame-index) * 4s);
+}
+.motion-gallery .gallery-aura {
+  position:absolute; inset:-25%; z-index:0; pointer-events:none;
+  background:radial-gradient(ellipse at 20% 20%,#fff5e6e6,transparent 55%),radial-gradient(ellipse at 80% 80%,#b66f8a99,transparent 60%),linear-gradient(140deg,#d5a4b3,#f4e6db 45%,#bd889e);
+  animation:gallery-pan 10s ease-in-out infinite alternate;
+  animation-delay:calc(var(--frame-index) * -1.7s);
+}
+.motion-gallery .gallery-heart {
+  position:absolute; inset:0; z-index:2; display:grid; place-items:center; pointer-events:none;
+  color:#fff8f1b3; padding-bottom:24px;
+}
+.motion-gallery .gallery-heart svg {
+  width:clamp(42px,5vw,64px); height:auto;
+  animation:gallery-heartbeat 4s ease-in-out infinite;
+  animation-delay:calc(var(--frame-index) * -.65s);
+}
+.motion-gallery .gallery-dust { position:absolute; inset:0; z-index:2; pointer-events:none; }
+.motion-gallery .gallery-dust svg {
+  position:absolute; left:22%; bottom:18%; width:13px; height:13px; color:#fff5e3; opacity:0;
+  animation:gallery-rise 6s ease-in-out infinite;
+  animation-delay:calc(var(--frame-index) * -.8s);
+}
+.motion-gallery .gallery-dust svg:nth-child(2) { left:73%; width:17px; height:17px; animation-delay:calc(var(--frame-index) * -.8s - 2s); }
+.motion-gallery .gallery-dust svg:nth-child(3) { left:51%; width:10px; height:10px; animation-delay:calc(var(--frame-index) * -.8s - 4s); }
+.motion-gallery .gallery-gleam {
+  position:absolute; inset:-40% -60%; z-index:2; pointer-events:none;
+  background:linear-gradient(110deg,transparent 40%,#fff9e84d 49%,#fff9e80a 56%,transparent 65%);
+  transform:translateX(-70%);
+  animation:gallery-sweep 24s ease-in-out infinite;
+  animation-delay:calc(var(--frame-index) * 4s);
+}
+.motion-gallery .gallery-item > span, .motion-gallery .gallery-item > i { z-index:3; left:18px; }
+.motion-gallery .gallery-item > span { bottom:30px; text-shadow:0 2px 10px #411c3066; }
+.motion-gallery .gallery-item > i { bottom:15px; }
+.motion-gallery .gallery-view {
+  position:absolute; top:14px; right:14px; z-index:3; width:32px; height:32px;
+  display:grid; place-items:center; border:1px solid #ffffff66; border-radius:50%;
+  background:#fff9f51a; opacity:0; transform:translateY(6px);
+  transition:opacity .3s, transform .3s; pointer-events:none;
+}
+/* Freeze motion when off screen, in a hidden tab, or inspecting a photo. */
+.motion-gallery[data-running="false"] .gallery-item { animation-play-state:running,paused!important; }
+.motion-gallery[data-running="false"] .gallery-item::after,
+.motion-gallery[data-running="false"] .gallery-item * { animation-play-state:paused!important; }
+.motion-gallery .gallery-item:focus-visible { scale:1.025; z-index:5; box-shadow:0 15px 35px #742f4330; }
+.motion-gallery .gallery-item:focus-visible .gallery-view { opacity:1; transform:translateY(0); }
+.motion-gallery:has(.gallery-item:focus-visible) .gallery-item { animation-play-state:running,paused; }
+.motion-gallery:has(.gallery-item:focus-visible) .gallery-item::after,
+.motion-gallery:has(.gallery-item:focus-visible) .gallery-item * { animation-play-state:paused; }
+@media (hover:hover) and (pointer:fine) {
+  .motion-gallery:hover .gallery-item { animation-play-state:running,paused; }
+  .motion-gallery:hover .gallery-item::after, .motion-gallery:hover .gallery-item * { animation-play-state:paused; }
+  .motion-gallery .gallery-item:hover { scale:1.035; z-index:5; box-shadow:0 18px 38px #742f4333; }
+  .motion-gallery .gallery-item:hover::after { opacity:1; animation:none; transform:none; }
+  .motion-gallery .gallery-item:hover .gallery-view { opacity:1; transform:translateY(0); }
+}
+.motion-gallery .gallery-item:active { scale:.985; }
+@keyframes gallery-float {
+  0%,100% { translate:0 3px; rotate:0deg; }
+  50% { translate:0 -7px; rotate:var(--frame-tilt); }
+}
+@keyframes gallery-pan {
+  from { transform:translate3d(-3%,-3%,0) scale(1); }
+  to { transform:translate3d(6%,4%,0) scale(1.1); }
+}
+@keyframes gallery-heartbeat {
+  0%,100% { transform:scale(.94) rotate(-6deg); opacity:.65; }
+  45% { transform:scale(1.15) rotate(5deg); opacity:1; }
+  65% { transform:scale(1.04) rotate(2deg); opacity:.85; }
+}
+@keyframes gallery-rise {
+  0% { opacity:0; transform:translate3d(0,12px,0) rotate(-15deg); }
+  25% { opacity:.65; }
+  75% { opacity:.3; }
+  100% { opacity:0; transform:translate3d(18px,-110px,0) rotate(20deg); }
+}
+@keyframes gallery-sweep {
+  0% { transform:translateX(-70%); opacity:0; }
+  2% { opacity:1; }
+  14% { transform:translateX(70%); opacity:1; }
+  17%,100% { transform:translateX(70%); opacity:0; }
+}
+@keyframes gallery-spotlight { 0%,17%,100% { opacity:0; } 3%,13% { opacity:1; } }
+@media (max-width:680px) {
+  .motion-gallery { gap:12px; padding:8px 2px; }
+  .motion-gallery .gallery-dust svg:nth-child(3) { display:none; }
+  .motion-gallery .gallery-view { width:26px; height:26px; top:10px; right:10px; opacity:.75; transform:none; }
+  .motion-gallery .gallery-item > span, .motion-gallery .gallery-item > i { left:12px; }
+  @keyframes gallery-float { 0%,100% { translate:0 2px; } 50% { translate:0 -4px; } }
+}
+.wedding-page[data-effects="off"] .motion-gallery .gallery-dust,
+.wedding-page[data-effects="off"] .motion-gallery .gallery-gleam { display:none; }
+@media (prefers-reduced-motion:reduce) {
+  .motion-gallery .gallery-dust, .motion-gallery .gallery-gleam { display:none; }
+}

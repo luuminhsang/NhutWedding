@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnp.*
+
+# Next.js build output and temporary restart copies
+.next/
+.next-*/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local environment and credentials (keep the configuration template)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vercel/
+.aws/
+.clasp.json
+.clasprc.json
+
+# Tests, caches and logs
+coverage/
+.cache/
+.turbo/
+playwright-report/
+test-results/
+*.log
+
+# Machine-specific editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
